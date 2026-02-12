@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Bebé Peluche ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffecf2 0%, #ffc1d3 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            padding: 45px 30px;
+            border-radius: 35px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.15);
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            color: #222;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+
+        .subtitulo {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 30px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .pregunta-box {
+            background-color: #f8f9fa;
+            border: 2px solid #eee;
+            padding: 18px 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #444;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        #mensaje-insistencia {
+            color: #d63384;
+            font-weight: 700;
+            min-height: 25px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 120px;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            touch-action: manipulation;
+            outline: none;
+        }
+
+        #btn-si {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 16px 45px;
+            font-size: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        #btn-no {
+            background-color: #f0f0f0;
+            color: #888;
+            padding: 12px 30px;
+            font-size: 15px;
+            z-index: 10;
+        }
+
+        .footer-text {
+            margin-top: 35px;
+            font-size: 11px;
+            color: #ccc;
+            letter-spacing: 0.5px;
+        }
+
+        #pantalla-final { display: none; }
+        
+        .img-detalles {
+            width: 100%;
+            border-radius: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-regresar {
+            background: transparent;
+            color: #bbb;
+            padding: 10px;
+            font-size: 12px;
+            margin-top: 15px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div id="pantalla-pregunta">
+            <h2>Mi bebe peluche</h2>
+            <p class="subtitulo">Tu niñi chipilon quiere saber algo</p>
+            
+            <div class="pregunta-box">
+                ¿Quieres ser mi San Valentín?
+            </div>
+
+            <div id="mensaje-insistencia"></div>
+
+            <div class="btn-container">
+                <button id="btn-si">Sí 💖</button>
+                <button id="btn-no">No</button>
+            </div>
+            
+            <p class="footer-text">hecho con amor de tu niño chipilon</p>
+        </div>
+
+        <div id="pantalla-final">
+            <h2>chiiiiii te amo mucho mi tomatito muakkkkkkk</h2>
+            <p class="subtitulo">ushhh obvio teniaas que darle en sii ashhh mas te valeee ehhh</p>
+            
+            <img src="leonardo.jpg" class="img-detalles">
+            
+            <p style="font-weight: 600; color: #444; margin-bottom: 5px;">Eresh la mejor</p>
+            <p style="color: #666; font-size: 14px;">Te amito infinito</p>
+            
+            <button class="btn-regresar" onclick="reiniciar()">Ir atrás</button>
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btn-no');
+        const btnSi = document.getElementById('btn-si');
+        const pPregunta = document.getElementById('pantalla-pregunta');
+        const pFinal = document.getElementById('pantalla-final');
+        const msgInsistencia = document.getElementById('mensaje-insistencia');
+
+        let clickCount = 0;
+        let fontSizeSi = 18;
+        let paddingSiV = 16;
+        let paddingSiH = 45;
+        let scaleNo = 1;
+
+        function moverOEncoger(e) {
+            if(e) e.preventDefault();
+            clickCount++;
+
+            if (clickCount === 2) {
+                msgInsistencia.innerText = "OKKKKKKK NO LE DAS EN SIIIIII OKKKK";
+            } else if (clickCount >= 4) {
+                 msgInsistencia.innerText = "TIENES A OTRO VRD BYEEEEEEEE";
+            }
+
+            // Mover botón NO
+            const maxX = window.innerWidth - btnNo.offsetWidth - 30;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 30;
+            const x = Math.max(30, Math.random() * maxX);
+            const y = Math.max(30, Math.random() * maxY);
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+
+            // Encoger NO
+            scaleNo *= 0.82; 
+            if (scaleNo < 0.35) scaleNo = 0.35;
+            btnNo.style.transform = `scale(${scaleNo})`;
+
+            // Agrandar SÍ
+            fontSizeSi += 10;
+            paddingSiV += 5;
+            paddingSiH += 12;
+            btnSi.style.fontSize = fontSizeSi + 'px';
+            btnSi.style.padding = `${paddingSiV}px ${paddingSiH}px`;
+        }
+
+        btnNo.addEventListener('click', moverOEncoger);
+        btnNo.addEventListener('touchstart', moverOEncoger, {passive: false});
+
+        btnSi.addEventListener('click', () => {
+            pPregunta.style.display = 'none';
+            pFinal.style.display = 'block';
+            // Resetear posición para que al volver no esté perdido
+            btnNo.style.position = 'relative';
+            btnNo.style.left = 'auto';
+            btnNo.style.top = 'auto';
+        });
+
+        function reiniciar() {
+            clickCount = 0;
+            fontSizeSi = 18;
+            paddingSiV = 16;
+            paddingSiH = 45;
+            scaleNo = 1;
+            
+            pFinal.style.display = 'none';
+            pPregunta.style.display = 'block';
+            msgInsistencia.innerText = "";
+            
+            btnSi.style.fontSize = '18px';
+            btnSi.style.padding = '16px 45px';
+            
+            btnNo.style.transform = 'scale(1)';
+            btnNo.style.position = 'relative';
+        }
+    </script>
+</body>
+</html>
